@@ -1,10 +1,9 @@
 from psycopg2 import connect, Error
 from logger import write_errors
 
-###### DATABASE CONNECTION #####
 class ConnectionDB:
-
-    db = None
+    
+    bd = None
     cursor = None
 
     def __init__(self, **param):
@@ -14,6 +13,6 @@ class ConnectionDB:
                 user=param['user'],
                 password=param['password']
             )
-            self.cursor()
+            self.cursor = self.db.cursor()
         except Error as e:
             write_errors(e, 'Ocurrio un error al conectarse a la base de datos')
