@@ -1,5 +1,5 @@
 import os
-
+import sys
 
 def menu_administrador():
     os.system("clear")
@@ -10,14 +10,14 @@ def menu_administrador():
         print('[2] Ver Libros en la base de datos')
         print('[3] Modificar Libros en la base de datos')
         print('[4] Eliminar Libros de la base de datos')
-        print("\n**************** PRESTAMOS ****************\n")
+        print("\n******************** PRESTAMOS ********************\n")
         print('[5] Registar Entregas y Prestamos a Usuarios')
         print('[6] Ver Prestamos y Entregas a Usuarios')
-        print("\n**************** USUARIOS ****************\n")
+        print("\n******************** USUARIOS ********************\n")
         print('[7] Agregar Usuarios al sistema')
         print('[8] Ver Usuarios en el sistema')
         print('[9] Eliminar Usuarios de sistema')
-        print("\n*******************************************\n")
+        print("\n***************************************************\n")
         print('\n[s] Salir del sistema\n')
         opcion = input('DIGITE SU SLECCION: ')
         
