@@ -1,5 +1,6 @@
-env
+.git/
+.env/
+.vscode/
 __pycache__
 *.pyc
-.vscode
 conn.py
