@@ -108,5 +108,31 @@ class ConnectionDB:
             )
             """
         )
+################ INSERTAR A LAS TABLAS ################
+    def insertar_editorial(self, editorial):
+        self._ejecutar_sql(
+            """INSERT INTO editorial (editorial) 
+            VALUES (%s,)""",
+            (editorial)
+    )
 
+    def insertar_titulo(self, title):
+        self._ejecutar_sql(
+            """INSERT INTO title (title) 
+            VALUES (%s,)""",
+            (title)
+    )
 
+    def insertar_autor(self, author):
+        self._ejecutar_sql(
+            """INSERT INTO author (author) 
+            VALUES (%s,)""",
+            (author)
+    )
+
+    def insertar_usuario(self, name, dni):
+        self._ejecutar_sql(
+            """INSERT INTO user (name, dni) 
+            VALUES (%s, %s)""",
+            (name, dni)
+        )
