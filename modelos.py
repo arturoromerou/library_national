@@ -1,5 +1,6 @@
 from psycopg2 import connect, Error
 from logger import write_errors
+from conn import conexion_pg
 
 class ConnectionDB:
     
@@ -31,6 +32,17 @@ class ConnectionDB:
                 write_errors(e, f"Ocurrio un error al ejecutar la sentencia SQL:\n\n{sentencia_sql}\n")
            if escribir_en_db:
                    self.db.rollback()
+                   
+################ LEER CODIGO SQL ################
+
+    def _leer_desde_sql(self):
+        try:
+            registros = self.cursor.fetchall()
+            for x in registros:
+                print(x)
+        except Exception as e:
+            escribir_al_log(e, f'Un error ocurrió al momento de leer desde la BD')
+        return registros
 
 ################ CREAR TABLAS ################
     def crear_tabla(self):
@@ -136,3 +148,5 @@ class ConnectionDB:
             VALUES (%s, %s)""",
             (name, dni)
         )
+
+################ VER LOS DATOS DE LAS TABLAS ################
