@@ -178,7 +178,7 @@ class Obtener(ConnectionDB):
 
 ################ ELIMINAR DATOS DE LAS TABLAS ################
 class Eliminar(ConnectionDB):
-    
+
     def eliminar_libro(self, id_book):
         self.ejecutar_sql(
             "DELETE FROM books WHERE id_book=%s",
@@ -189,4 +189,10 @@ class Eliminar(ConnectionDB):
         self.ejecutar_sql(
             "DELETE FROM user WHERE user_id=%s",
             (user_id,)
-        )    
+        )
+
+    def eliminar_registro(self, id):
+        self.ejecutar_sql(
+            "DELETE FROM loans WHERE id=%s",
+            (id)
+        )   
