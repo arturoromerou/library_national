@@ -66,7 +66,7 @@ class Tabla(ConnectionDB):
             """
             CREATE TABLE loans(
                 id SERIAL,
-                retal_date INT,
+                rental_date INT,
                 return_date INT,
                 id_book INT,
                 status INT,
@@ -122,7 +122,7 @@ class Tabla(ConnectionDB):
         )
 
 ################ INSERTAR A LAS TABLAS ################
-class Registrar(ConnectionDB):
+class RegistrarLibro(ConnectionDB):
 
     def insertar_editorial(self, editorial):
         self.ejecutar_sql(
@@ -145,11 +145,29 @@ class Registrar(ConnectionDB):
             (author)
     )
 
+    def insertar_libro(self, id_book):
+        self.ejecutar_sql(
+            """INSERT INTO books (id_book)
+            VALUES (%s,)""",
+            (id_book)
+        )
+
+class RegistrarUsuario(ConnectionDB):
+
     def insertar_usuario(self, name, dni):
         self.ejecutar_sql(
-            """INSERT INTO user (name, dni) 
+            """INSERT INTO loans (name, dni) 
             VALUES (%s, %s)""",
             (name, dni)
+        )
+
+class RegistrarPrestamo(ConnectionDB):
+    
+    def ingresar_prestamo(self, rental_date, return_date, id_book, user_id):
+        self.ejecutar_sql(
+            """INSERT INTO loans (rental_date, return_date, id_book, user_id) 
+            VALUES (%s, %s, %s, %s)""",
+            (rental_date, return_date, id_book, user_id)
         )
 
 ################ VER LOS DATOS DE LAS TABLAS ################
