@@ -19,7 +19,7 @@ class ConnectionDB:
             write_errors(e, 'Ocurrio un error al conectarse a la base de datos')
 
 ################ EJECUTAR CODIGO SQL ################
-    def _ejecutar_sql(
+    def ejecutar_sql(
            self, sentencia_sql, param=None, 
            escribir_en_db=True
        ):
@@ -33,7 +33,7 @@ class ConnectionDB:
                    self.db.rollback()
 
 ################ LEER CODIGO SQL ################
-    def _leer_desde_sql(self):
+    def leer_desde_sql(self):
         try:
             registros = self.cursor.fetchall()
             for x in registros:
@@ -43,10 +43,12 @@ class ConnectionDB:
         return registros
 
 ################ CREAR TABLAS ################
+class Tabla(ConnectionDB):
+
     def crear_tabla(self):
         
         ##### TABLA LIBROS #####
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """
             CREATE TABLE books(
                 id_book INT NOT NULL,
@@ -60,7 +62,7 @@ class ConnectionDB:
         )
            
         ##### TABLA PRESTAMOS #####
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """
             CREATE TABLE loans(
                 id SERIAL,
@@ -75,7 +77,7 @@ class ConnectionDB:
         )
 
         ##### TABLA USUARIOS #####
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """
             CREATE TABLE user(
                 user_id SERIAL,
@@ -87,7 +89,7 @@ class ConnectionDB:
         )
 
         ##### TABLA EDITORIAL #####
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """
             CREATE TABLE editorial(
                 editorial_id SERIAL,
@@ -98,7 +100,7 @@ class ConnectionDB:
         )
 
         ##### TABLA TITULO #####
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """
             CREATE TABLE title(
                 title_id SERIAL,
@@ -109,7 +111,7 @@ class ConnectionDB:
         )
 
         ##### TABLA AUTOR #####
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """
             CREATE TABLE author(
                 author_id SERIAL,
@@ -120,65 +122,71 @@ class ConnectionDB:
         )
 
 ################ INSERTAR A LAS TABLAS ################
+class Registrar(ConnectionDB):
+
     def insertar_editorial(self, editorial):
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """INSERT INTO editorial (editorial) 
             VALUES (%s,)""",
             (editorial)
     )
 
     def insertar_titulo(self, title):
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """INSERT INTO title (title) 
             VALUES (%s,)""",
             (title)
     )
 
     def insertar_autor(self, author):
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """INSERT INTO author (author) 
             VALUES (%s,)""",
             (author)
     )
 
     def insertar_usuario(self, name, dni):
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             """INSERT INTO user (name, dni) 
             VALUES (%s, %s)""",
             (name, dni)
         )
 
 ################ VER LOS DATOS DE LAS TABLAS ################
+class Obtener(ConnectionDB):
+
     def ver_libros(self):
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             "SELECT * FROM books",
             escribir_en_db=False
         )
-        self._leer_desde_sql()
+        self.leer_desde_sql()
 
     def ver_usuarios(self):
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             "SELECT * FROM user",
             escribir_en_db=False
         )
-        self._leer_desde_sql()
+        self.leer_desde_sql()
 
     def ver_prestamos(self):
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             "SELECT * FROM loans",
             escribir_en_db=False
         )
-        self._leer_desde_sql()
+        self.leer_desde_sql()
 
 ################ ELIMINAR DATOS DE LAS TABLAS ################
+class Eliminar(ConnectionDB):
+    
     def eliminar_libro(self, id_book):
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             "DELETE FROM books WHERE id_book=%s",
             (id_book,)
         )
     
     def eliminar_usuario(self, user_id):
-        self._ejecutar_sql(
+        self.ejecutar_sql(
             "DELETE FROM user WHERE user_id=%s",
             (user_id,)
         )    
