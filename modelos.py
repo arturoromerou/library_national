@@ -28,6 +28,7 @@ class ConnectionDB:
         param=None, 
         escribir_en_db=True
     ):
+        """Ejecuta codigo SQL."""
         try:
             execute = self.cursor.execute(sentencia_sql, param) # execute corre las sentencias sql
             if escribir_en_db:
@@ -38,12 +39,13 @@ class ConnectionDB:
                 self.db.rollback()
 
 
-    def leer_desde_sql(self):
+    def leer_desde_sql(self, sql_code):
         """Leer codigo sql."""
+        registros = None
+
+        self.ejecutar_sql(sql_code, escribir_en_db=False)
         try:
             registros = self.cursor.fetchall()
-            for x in registros:
-                print(x)
         except Exception as e:
             write_errors(e, f'Un error ocurrió al momento de leer desde la BD')
         return registros
@@ -133,10 +135,12 @@ class Model():
         
         self.connection.ejecutar_sql(sql, tuple(values))
 
-    # TODO
-    def read(self):
+    @classmethod
+    def read(cls):
         """Obtiene un elemento de la base de datos."""
-        pass
+        table_name = cls.table_name
+        sql = f"SELECT * FROM {table_name}"
+        return cls.connection.leer_desde_sql(sql)
 
     # TODO
     def update(self):
@@ -159,9 +163,7 @@ class Editorial(Model):
 
     def __init__(self, name):
         """Método constructor."""
-        self.name = name
-
-
+        self.name = name        
 
 class Autor(Model):
     """Clase Autor"""
