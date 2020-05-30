@@ -123,6 +123,11 @@ class VistaEditorial:
         cls.menu()
 
     @classmethod
+    def list_view(cls):
+        for i in EditorialController.read():
+            print(f"Editorial: {i[1]}\n")
+
+    @classmethod
     def menu(cls):
         os.system("clear")
         if cls.mensaje:
@@ -144,9 +149,9 @@ class VistaEditorial:
             if opcion == "1":
                 os.system("clear")
                 cls.create_view()
-            #elif opcion == "2":
-            #    os.system("clear")
-            #    read_view()
+            elif opcion == "2":
+                os.system("clear")
+                cls.list_view()
             #elif opcion == "3":
             #    os.system("clear")
             #    update_view()
