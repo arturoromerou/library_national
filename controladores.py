@@ -6,6 +6,13 @@ class EditorialController():
     
     @staticmethod
     def create(**kwargs):
-        editorial = Editorial(**kwargs)
-        editorial.create()
-        return editorial
+        if "name" in kwargs and kwargs["name"] is not None:
+            editorial = Editorial(**kwargs)
+            editorial.create()
+            return editorial
+        return None
+
+    @staticmethod
+    def read():
+        return Editorial.read()
+        
