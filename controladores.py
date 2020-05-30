@@ -1,22 +1,11 @@
-from modelos import ConnectionDB
+from modelos import Editorial
 
-class ControllerLibrary:
-    library = None
 
-    @classmethod
-    def log_library(cls, data_library):
-        cls.library = library(data_library['code'])
-        return cls.library
-
-class ControllerBooks:
-
-    book = None
-
-    @classmethod
-    def log_book(cls, data_book):
-        if cls.book is None:
-            cls.book = []
-        new_book = book(
-            data_book['name']
-            data_book[]
-        )
+class EditorialController():
+    """Controlador de Editorial."""
+    
+    @staticmethod
+    def create(**kwargs):
+        editorial = Editorial(**kwargs)
+        editorial.create()
+        return editorial
