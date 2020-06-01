@@ -112,20 +112,43 @@ from controladores import EditorialController
 
 class VistaEditorial:
 
-    mensaje = None
+    mensaje = None # variable mensaje es igual a "vacio"
 
     @classmethod
-    def create_view(cls):
-        name = input('Escriba el nombre de la editorial: ')
-        result = EditorialController.create(name=name)
-        if result:
+    def create_view(cls): # metodo de clase create_view
+        name = input('Escriba el nombre de la editorial: ') # Se le asigna el valor obtenido del input a la variable "name".
+        """ Se llama al metodo create de la clase EditorialController
+        ...dicho metodo recive el valor de la variable "name", y se le asigna...
+        al objeto "name".
+        El valor obtenido se le asigna a la variable "result"."""
+        result = EditorialController.create(name) 
+        if hasattr(result, "name"):                                      
             cls.mensaje = "Has registrado la editorial " + result.name
         cls.menu()
 
     @classmethod
+    def delete_view(cls):
+        editorial_id = int(input('Escriba el id del editorial: '))
+        EditorialController.drop(editorial_id)
+        cls.menu()
+    
+
+    @classmethod
     def list_view(cls):
+        
         for i in EditorialController.read():
             print(f"Editorial: {i[1]}\n")
+        print(len(EditorialController.read()))
+            
+        print("\n****************************************\n")
+        print('[m] Menu Principal')
+        print('[s] Salir\n')
+        opcion = input('ELIJA UNA OPCION: ')    
+        if opcion == "s":
+            sys.exit()
+        else:
+            os.system("clear")
+            cls.menu()
 
     @classmethod
     def menu(cls):
@@ -135,15 +158,18 @@ class VistaEditorial:
         continuar = True
         while continuar:
             print("*******************************************")
-            print("               Seccion Editorial")
-            print("*******************************************\n")
-            print('[1] Agregar Editorial')
-            print('[2] Ver Editorial')
-            print('[3] Modificar Editorial')
-            print('[4] Eliminar Editorial')
-            print("\n****************************************\n")
-            print('[m] Menu Principal')
-            print('[s] Salir\n')
+            print("*               Seccion Editorial         *")
+            print("*******************************************")
+            print('*          [1] Agregar Editorial          *')
+            print('*                                         *')
+            print('*          [2] Ver Editorial              *')
+            print('*                                         *')
+            print('*          [3] Modificar Editorial        *')
+            print('*                                         *')
+            print('*          [4] Eliminar Editorial         *')
+            print("*******************************************")
+            print('            [m] Menu Principal')
+            print('            [s] Salir\n')
             opcion = input('ELIJA UNA OPCION: ')
 
             if opcion == "1":
@@ -155,9 +181,9 @@ class VistaEditorial:
             #elif opcion == "3":
             #    os.system("clear")
             #    update_view()
-            #elif opcion == "4":
-            #    os.system("clear")
-            #    delete_view()
+            elif opcion == "4":
+                os.system("clear")
+                cls.delete_view()
             elif opcion == "s":
                 sys.exit()
             else:
@@ -191,7 +217,7 @@ class VistaAplicacion():
             print("[4] Seccion de Editorial")            
             print("\n***************************************************\n")
             print("[s] Salir del sistema\n")
-            opcion = input('ELIJA UNA OPCION: ')
+            opcion = input('ELIJA UNA OPCION: ') # numero que selecciona el usuario.
 
             #if opcion == "1":
             #    VistaLibros.menu()
@@ -200,7 +226,7 @@ class VistaAplicacion():
             #elif opcion == "3":
             #    VistaPrestamos.menu()
             if opcion == "4":
-                VistaEditorial.menu()
+                VistaEditorial.menu() # si el numero es 4 llama al metodo menu() de la clase VistaEditorial.
             elif opcion == "s":
                 sys.exit()
             else:
