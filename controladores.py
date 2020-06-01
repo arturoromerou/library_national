@@ -1,18 +1,24 @@
 from modelos import Editorial
+from modelos import Model
 
 
-class EditorialController():
+class EditorialController:
     """Controlador de Editorial."""
     
     @staticmethod
-    def create(**kwargs):
-        if "name" in kwargs and kwargs["name"] is not None:
-            editorial = Editorial(**kwargs)
-            editorial.create()
-            return editorial
+    def create(name): # Metodo estatico "create" 
+        if name != "":
+            editorial = Editorial(name) # instancio un objeto en la clase Editorial
+            # llamo el metodo create del objeto instanciado para guardarlo en bd
+            rowcount = editorial.create() # el metodo "create" retorna el numero de filasafectadas
+            if rowcount >= 1:
+                return editorial
         return None
 
     @staticmethod
     def read():
         return Editorial.read()
+
+    def drop(self):
+        return EditorialController(self.eliminar)
         
