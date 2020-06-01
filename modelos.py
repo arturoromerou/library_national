@@ -33,6 +33,7 @@ class ConnectionDB:
             execute = self.cursor.execute(sentencia_sql, param) # execute corre las sentencias sql
             if escribir_en_db:
                 result =  self.db.commit()
+            return self.cursor.rowcount    # numero de filas afectadas
         except Exception as e:
             write_errors(e, f"Ocurrio un error al ejecutar la sentencia SQL:\n\n{sentencia_sql}\n")
             if escribir_en_db:
@@ -122,48 +123,55 @@ class Tabla(ConnectionDB):
 class Model():
     """Generic model class."""
 
-    table_name = None
+    table_name = None  # nombre de la tabla 
     connection = ConnectionDB()  # Esto no se hace
 
     def create(self):
         """Guarda en base de datos."""
-        table_name = self.table_name
-        keys = ", ".join(self.__dict__.keys())
-        values_placeholders = ", ".join(["%s" for i in range(len(self.__dict__.keys()))])
+        table_name = self.table_name # le asignamos el valor del olbjeto self
+        keys = ", ".join(self.__dict__.keys()) 
+        values_placeholders = ", ".join(["%s" for i in range(len(self.__dict__.keys()))]) # 
         values = self.__dict__.values()
         sql = f"INSERT INTO {table_name} ({keys}) VALUES ({values_placeholders})"
         
-        self.connection.ejecutar_sql(sql, tuple(values))
+        return self.connection.ejecutar_sql(sql, tuple(values)) # retorna el numero de fila afectadas
 
     @classmethod
     def read(cls):
         """Obtiene un elemento de la base de datos."""
         table_name = cls.table_name
         sql = f"SELECT * FROM {table_name}"
+        
         return cls.connection.leer_desde_sql(sql)
 
-    # TODO
     def update(self):
         """Actualiza un elemento de la base de datos."""
-        pass
+        table_name = self.table_name
+        sql = f"UPDATE {table_name} SET id = %s"
+        
+        self.connection(sql)
 
-    # TODO
     def delete(self):
         """Borra un elemento de la base de datos."""
-        pass
-
-
+        table_name = self.table_name
+        sql = f"DELETE FROM {table_name} WHERE editorial_id = %d"
+        
+        self.connection.ejecutar_sql(sql)
 
 class Editorial(Model):
     """Clase Editorial."""
 
     table_name = "editorial"
-
     name = None
+    editorial_id = None
 
     def __init__(self, name):
         """Método constructor."""
-        self.name = name        
+        self.name = name
+
+    def eliminar(self, editorial_id):
+        self.editorial_id   
+       
 
 class Autor(Model):
     """Clase Autor"""
@@ -171,6 +179,8 @@ class Autor(Model):
     table_name = "author"
 
     name = None
+
+    mobile_id = None
 
     def __init__(self, name):
         """Metodo Constructor"""
