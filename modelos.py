@@ -15,7 +15,7 @@ class ConnectionDB:
             self.db = connect(
                 host = '127.0.0.1', # localhost
                 user = 'postgres',  # usuario de la bd
-                password = 'Ar2098urd',  # contrasenia
+                password = '/1(Iwasborn)*84',  # contrasenia
                 database = 'biblioteca_nacional'  # nombre de la bd
             )
             self.cursor = self.db.cursor()
