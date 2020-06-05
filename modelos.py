@@ -88,7 +88,7 @@ class Tabla(ConnectionDB):
         # TABLA USUARIOS
         self.ejecutar_sql(
             """
-            CREATE TABLE IF NOT EXISTS user(
+            CREATE TABLE IF NOT EXISTS "user"(
                 user_id SERIAL,
                 name VARCHAR(50) NOT NULL,
                 dni INT NOT NULL,
@@ -111,10 +111,10 @@ class Tabla(ConnectionDB):
         # TABLA AUTOR
         self.ejecutar_sql(
             """
-            CREATE TABLE author(
+            CREATE TABLE IF NOT EXISTS author(
                 author_id SERIAL,
                 name VARCHAR(50) NOT NULL,
-                PRIMARY KEY (editorial_id)
+                PRIMARY KEY (author_id)
             )
             """
         )
