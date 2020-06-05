@@ -1,2 +1,5 @@
+pylint
+black
+isort
+pydocstyle
 psycopg2
-flake8
