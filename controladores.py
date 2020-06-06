@@ -14,11 +14,13 @@ class EditorialController:
             if rowcount >= 1:
                 return editorial
         return None
-
+    
+    # Agregué (Miguel)
     @staticmethod
-    def read():
+    #
+    def update(self):
         return Editorial.read()
 
+    @staticmethod
     def drop(self):
-        return EditorialController(self.eliminar)
-        
+        return Editorial.Controller(self.eliminar)

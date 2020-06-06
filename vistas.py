@@ -126,6 +126,12 @@ class VistaEditorial:
             cls.mensaje = "Has registrado la editorial " + result.name
         cls.menu()
 
+    # Agregué (Miguel)
+    @classmethod
+    def update_view(cls):
+        cls.menu()
+    #
+
     @classmethod
     def delete_view(cls):
         editorial_id = int(input('Escriba el id del editorial: '))
@@ -178,9 +184,12 @@ class VistaEditorial:
             elif opcion == "2":
                 os.system("clear")
                 cls.list_view()
-            #elif opcion == "3":
-            #    os.system("clear")
-            #    update_view()
+            
+            # Habilitado (Miguel)
+            elif opcion == "3":
+                os.system("clear")
+                cls.update_view()
+            #
             elif opcion == "4":
                 os.system("clear")
                 cls.delete_view()
