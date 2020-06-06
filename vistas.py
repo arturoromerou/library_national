@@ -129,15 +129,15 @@ class VistaEditorial:
     # Agregué (Miguel)
     @classmethod
     def update_view(cls):
-        editorial_edit = int(input('Ingrese el ID del editorial a actualizar: '))
-        EditorialController.update(editorial_edit)
+        editorial_id = int(input('Ingrese el ID del editorial a actualizar: '))
+        EditorialController.update(editorial_id)
         cls.menu()
     #
 
     @classmethod
     def delete_view(cls):
         editorial_id = int(input('Escriba el id del editorial: '))
-        EditorialController.drop(editorial_id)
+        EditorialController.delete(editorial_id)
         cls.menu()
     
 
