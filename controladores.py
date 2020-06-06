@@ -26,5 +26,5 @@ class EditorialController:
     #
 
     @staticmethod
-    def drop():
+    def delete():
         return Editorial.delete()
