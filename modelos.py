@@ -169,9 +169,11 @@ class Editorial(Model):
         """Método constructor."""
         self.name = name
 
+    # Comenté (Miguel)
+    """
     def eliminar(self, editorial_id):
         self.editorial_id   
-       
+    """   
 
 class Autor(Model):
     """Clase Autor"""

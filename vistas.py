@@ -129,6 +129,8 @@ class VistaEditorial:
     # Agregué (Miguel)
     @classmethod
     def update_view(cls):
+        editorial_edit = int(input('Ingrese el ID del editorial a actualizar: '))
+        EditorialController.update(editorial_edit)
         cls.menu()
     #
 
