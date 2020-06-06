@@ -15,12 +15,16 @@ class EditorialController:
                 return editorial
         return None
     
+    @staticmethod
+    def read():
+        return Editorial.read()
+    
     # Agregué (Miguel)
     @staticmethod
+    def update():
+        return Editorial.update()
     #
-    def update(self):
-        return Editorial.read()
 
     @staticmethod
-    def drop(self):
-        return Editorial.Controller(self.eliminar)
+    def drop():
+        return Editorial.delete()
